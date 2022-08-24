@@ -4,30 +4,7 @@ const chakram = require('chakram');
 const expect = chakram.expect;
 const api = require('./utils/api');
 const data = require('../server/data.json');
-
-const postedComment = {
-    postId: "number",
-    id: "number",
-    name: 'name',
-    email: "email",
-    body: "body"
-};
-
-const updatedComment = {
-    postId: 1,
-    id: 1,
-    name: "iii",
-    email: "Eliseo@gardner.biz",
-    body: "laudantium enim quasi est quidem magnam "
-};
-
-const invalidComment = {
-    postId: 503,
-    id: 111,
-    name: "iiic",
-    email: "Eliseo@gardner.biz",
-    body: "laudantium enim quasi est quidem"
-};
+const commentData = require('../database/testdata.json');
 
 
 
@@ -35,8 +12,8 @@ describe('Comments', () => {
     describe('Created', () => {
         let addedId;
 
-        it("it should add a comment", () => {
-            return chakram.post(api.url('comments'), postedComment)
+        it("should add a comment", () => {
+            return chakram.post(api.url('comments'), commentData.comments[0])
                 .then(response => {
                     expect(response.response.statusCode).to.match(/^20/);
                     expect(response.body.data.id).to.be.defined;
@@ -55,13 +32,9 @@ describe('Comments', () => {
         });
 
         it("should not add a comment without existing id", () => {
-            return chakram.post(api.url('comments123'), {
-                postId: "number",
-                id: "number",
-                name: 'name',
-                email: "email",
-                body: "body"
-            }).then(response => {
+            return chakram.post(api.url('comments123'), 
+                commentData.comments[0])
+                .then(response => {
                 return expect(response).to.have.status(404);
             });
 
@@ -137,7 +110,7 @@ describe('Comments', () => {
 
         describe("Updated", () => {
             it("should update an existing a comment", () => {
-                const response = chakram.put(api.url('comments/1'), updatedComment);
+                const response = chakram.put(api.url('comments/1'), commentData.comments[1]);
                 expect(response).to.have.status(200);
                 return response.then(data => {
                     const comment = chakram.get(api.url('comments/1'));
@@ -152,7 +125,7 @@ describe('Comments', () => {
             });
 
             it("should not update a comment which does not exist", () => {
-                const response = chakram.put(api.url('comments/' + invalidComment));
+                const response = chakram.put(api.url('comments/' + commentData.comments[2]));
 
                 expect(response).to.have.status(404);
                 return chakram.wait();
@@ -183,3 +156,4 @@ describe('Comments', () => {
 
 
 });
+

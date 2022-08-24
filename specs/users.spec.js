@@ -4,36 +4,7 @@ const chakram = require('chakram');
 const expect = chakram.expect;
 const api = require('./utils/api');
 const data = require('../server/data.json');
-
-const newUser = {
-    id: "id",
-    name: "name",
-    username: "username",
-    email: "email"
-};
-
-const existingUser = {
-    id: 2,
-    name: "Ervin Howell",
-    username: "Antonette",
-    email: "Shanna@melissa.tv"
-};
-
-const updatedUser = {
-    id: 2,
-    name: "Ervin Howell",
-    username: "Anton",
-    email: "Shanna@melissa.tv"
-};
-
-const invalidUser = {
-    id: 14,
-    name: "Mrs. Dennis Schule",
-    username: "Leopoldo_Cork",
-    email: "Karley_Dach@jasper.info"
-};
-
-
+const userData = require('../database/testdata.json')
 
 
 describe('Users', () => {
@@ -41,7 +12,7 @@ describe('Users', () => {
         let addedId;
 
         it("should create a new user", () => {
-            return chakram.post(api.url('users'), newUser)
+            return chakram.post(api.url('users'), userData.users[0])
                 .then(response => {
                     expect(response).to.have.status(201);
                     expect(response.body.data.id).to.be.defined;
@@ -59,7 +30,7 @@ describe('Users', () => {
         });
 
         it("should not add user with an existing id", () => {
-            const response = chakram.post(api.url('users'), existingUser);
+            const response = chakram.post(api.url('users'), userData.users[1]);
             expect(response).to.have.status(500);
             return chakram.wait();
         });
@@ -88,7 +59,7 @@ describe('Users', () => {
 
     describe("Updated", () => {
         it("should update an existing a user data", () => {
-            const response = chakram.put(api.url('users/2'), updatedUser);
+            const response = chakram.put(api.url('users/2'), userData.users[2]);
 
             expect(response).to.have.status(200);
             return response.then(data => {
@@ -104,7 +75,7 @@ describe('Users', () => {
         });
 
         it("should not update not existing users data", () => {
-            const response = chakram.put(api.url('users/14'), invalidUser);
+            const response = chakram.put(api.url('users/14'), userData.users[4]);
             expect(response).to.have.status(404);
             return chakram.wait();
         });

@@ -4,45 +4,15 @@ const chakram = require('chakram');
 const expect = chakram.expect;
 const api = require('./utils/api');
 const data = require('../server/data.json');
+const photosData = require('../database/testdata.json');
 
-const postedPhoto = {
-    albumId: "number",
-    id: "number",
-    title: "title",
-    url: "url",
-    thumbnailUrl: "thumbnailUrl"
-};
-
-const existingPhoto = {
-    albumId: 1,
-    id: 1,
-    title: "title",
-    url: "url",
-    thumbnailUrl: "thumbnailUrl"
-};
-
-const updatedPhoto1 = {
-    albumId: 1,
-    id: 1,
-    title: "similique qui sunt",
-    url: "https://via.placeholder.com/600/92c952",
-    thumbnailUrl: "https://via.placeholder.com/150/92c952"
-};
-
-const invalidPhoto = {
-    albumId: 1,
-    id: 5100,
-    title: "similique qui sunt",
-    url: "https://via.placeholder.com/600/92c952",
-    thumbnailUrl: "https://via.placeholder.com/150/92c952"
-};
 
 describe('Photos', () => {
     describe('Create', () => {
         let addedId;
 
-        it('should add a new photo', () => {
-            return chakram.post(api.url('photos'), postedPhoto)
+        it('should add new photo', () => {
+            return chakram.post(api.url('photos'), photosData.photos[0])
                 .then(response => {
                     expect(response.response.statusCode).to.match(/^20/);
                     expect(response.body.data.id).to.be.defined;
@@ -58,8 +28,8 @@ describe('Photos', () => {
                 });
         });
 
-        it("it should not add photo with existing id", () => {
-            const response = chakram.post(api.url('photos'), existingPhoto);
+        it("should not add photo with existing id", () => {
+            const response = chakram.post(api.url('photos'), photosData.photos[1]);
             expect(response).to.have.status(500);
             return chakram.wait();
         });
@@ -92,7 +62,7 @@ describe('Photos', () => {
 
     describe("Updated", () => {
         it("should update an existing a photo", () => {
-            const response = chakram.put(api.url('photos/1'), updatedPhoto1);
+            const response = chakram.put(api.url('photos/1'), photosData.photos[2]);
 
             expect(response).to.have.status(200);
             return response.then(data => {
@@ -108,7 +78,7 @@ describe('Photos', () => {
         });
 
         it("should not update a not existing photo", () => {
-            const response = chakram.put(api.url('posts/5100'), invalidPhoto);
+            const response = chakram.put(api.url('posts/5100'), photosData.photos[3]);
             expect(response).to.have.status(404);
             return chakram.wait();
         });

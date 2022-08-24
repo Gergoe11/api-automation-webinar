@@ -2,35 +2,7 @@ const chakram = require('chakram');
 const expect = chakram.expect;
 const api = require('./utils/api');
 const data = require('../server/data.json');
-
-
-const postedTodo = {
-    userId: "number",
-    id: "number",
-    title: "title",
-    completed: false
-};
-
-const existingTodo = {
-    userId: 1,
-    id: 1,
-    title: "delectus aut autem",
-    completed: false
-};
-
-const updatedTodo = {
-    userId: 1,
-    id: 1,
-    title: "aut autem",
-    completed: false
-};
-
-const invalidTodo = {
-    userId: 211,
-    id: 211,
-    title: "lorem",
-    completed: false
-};
+const todosData = require('../database/testdata.json')
 
 
 describe('Todos', () => {
@@ -38,25 +10,25 @@ describe('Todos', () => {
         let addedId;
 
         it("should create a new todo", () => {
-            return chakram.post(api.url('todos'), postedTodo)
+            return chakram.post(api.url('todos'), todosData.todos[0])
                 .then(response => {
                     expect(response).to.have.status(201);
                     expect(response.body.data.id).to.be.defined;
 
                     addedId = response.body.data.id;
 
-                    const checkUser = chakram.get(api.url('todos/' + addedId));
-                    expect(checkUser).to.have.status(200);
-                    expect(checkUser).to.have.json('data.userId', 'number');
-                    expect(checkUser).to.have.json('data.id', 'number');
-                    expect(checkUser).to.have.json('data.title', 'title');
+                    const checkTodo = chakram.get(api.url('todos/' + addedId));
+                    expect(checkTodo).to.have.status(200);
+                    expect(checkTodo).to.have.json('data.userId', 'number');
+                    expect(checkTodo).to.have.json('data.id', 'number');
+                    expect(checkTodo).to.have.json('data.title', 'title');
                     return chakram.wait();
 
                 });
         });
 
         it("should not add a todo with existing id", () => {
-            const response = chakram.post(api.url('todos'), existingTodo);
+            const response = chakram.post(api.url('todos'), todosData.todos[1]);
             expect(response).to.have.status(500);
             return chakram.wait();
         });
@@ -85,7 +57,7 @@ describe('Todos', () => {
 
     describe("Updated", () => {
         it("should update an existing todo data", () => {
-            const response = chakram.put(api.url('todos/2'), updatedTodo);
+            const response = chakram.put(api.url('todos/2'), todosData.todos[2]);
 
             expect(response).to.have.status(200);
             return response.then(data => {
@@ -101,7 +73,7 @@ describe('Todos', () => {
         });
 
         it("should not update not existing todo data", () => {
-            const response = chakram.put(api.url('todos/211'), invalidTodo);
+            const response = chakram.put(api.url('todos/211'), todosData.todos[3]);
             expect(response).to.have.status(404);
             return chakram.wait();
         });
@@ -120,7 +92,7 @@ describe('Todos', () => {
         });
 
         it("should not delete todo which does not exist", () => {
-            const response = chakram.delete(api.url('todos/' + invalidTodo));
+            const response = chakram.delete(api.url('todos/' + todosData.todos[3]));
             expect(response).to.have.status(404);
             return chakram.wait()
         });

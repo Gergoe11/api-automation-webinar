@@ -7,3 +7,5 @@ const data = require('../server/data.json');
 
 describe('Posts', () => {
 });
+
+// already solved by the webinars lecturer at ../.solution
