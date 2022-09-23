@@ -1,0 +1,129 @@
+    {
+        "comments": [
+            {
+                "postId": "number",
+                "id": "number",
+                "name": "name",
+                "email": "email",
+                "body": "body"
+            },
+            {
+                "postId": 1,
+                "id": 1,
+                "name": "iii",
+                "email": "Eliseo@gardner.biz",
+                "body": "laudantium enim quasi est quidem magnam "
+            },
+            {
+                "postId": 503,
+                "id": 111,
+                "name": "iiic",
+                "email": "Eliseo@gardner.biz",
+                "body": "laudantium enim quasi est quidem"
+            }
+        ],
+        "photos": [
+            {
+                "albumId": "number",
+                "id": "number",
+                "title": "title",
+                "url": "url",
+                "thumbnailUrl": "thumbnailUrl"
+            },
+            {
+                "albumId": 1,
+                "id": 1,
+                "title": "title",
+                "url": "url",
+                "thumbnailUrl": "thumbnailUrl"
+            },
+            {
+                "albumId": 1,
+                "id": 1,
+                "title": "similique qui sunt",
+                "url": "https://via.placeholder.com/600/92c952",
+                "thumbnailUrl": "https://via.placeholder.com/150/92c952"
+            },
+            {
+                "albumId": 1,
+                "id": 5100,
+                "title": "similique qui sunt",
+                "url": "https://via.placeholder.com/600/92c952",
+                "thumbnailUrl": "https://via.placeholder.com/150/92c952"
+            }
+        ],
+        "todos": [
+            {
+                "userId": "number",
+                "id": "number",
+                "title": "title",
+                "completed": false
+            },
+            {
+                "userId": 1,
+                "id": 1,
+                "title": "delectus aut autem",
+                "completed": false
+            },
+            {
+                "userId": 1,
+                "id": 1,
+                "title": "aut autem",
+                "completed": false
+            },
+            {
+                "userId": 211,
+                "id": 211,
+                "title": "lorem",
+                "completed": false
+            }
+        ],
+        "users": [
+            {
+                "id": "id",
+                "name": "name",
+                "username": "username",
+                "email": "email"
+            },
+            {
+                "id": 2,
+                "name": "Ervin Howell",
+                "username": "Antonette",
+                "email": "Shanna@melissa.tv"
+            },
+            {
+                "id": 2,
+                "name": "Ervin Howell",
+                "username": "Anton",
+                "email": "Shanna@melissa.tv"
+            },
+            {
+                "id": 14,
+                "name": "Mrs. Dennis Schule",
+                "username": "Leopoldo_Cork",
+                "email": "Karley_Dach@jasper.info"
+            }
+        ],
+        "albums": [
+            {
+                "userId": "number",
+                "id": "number",
+                "title": "title"
+            },
+            {
+                "userId": "1",
+                "id": "1",
+                "title": "saepe unde necessitatibus rem"
+            },
+            {
+                "userId": 1,
+                "id": 1,
+                "title": "delectus aut autem"
+            },
+            {
+                "userId": 211,
+                "id": 211,
+                "title": "qui culpa itaque"
+            }
+        ]
+    }
