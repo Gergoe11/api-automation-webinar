@@ -1,11 +1,9 @@
 'use strict';
-
 const chakram = require('chakram');
 const expect = chakram.expect;
 const api = require('./utils/api');
 const data = require('../server/data.json');
 const userData = require('../database/testdata.json')
-
 
 describe('Users', () => {
     describe('Create', () => {
@@ -79,7 +77,6 @@ describe('Users', () => {
             expect(response).to.have.status(404);
             return chakram.wait();
         });
-
     });
 
     describe("Delete", () => {
@@ -98,10 +95,5 @@ describe('Users', () => {
             expect(response).to.have.status(404);
             return chakram.wait()
         });
-
-
-
     });
-
-
 });

@@ -1,11 +1,9 @@
 'use strict';
-
 const chakram = require('chakram');
 const expect = chakram.expect;
 const api = require('./utils/api');
 const data = require('../server/data.json');
 const photosData = require('../database/testdata.json');
-
 
 describe('Photos', () => {
     describe('Create', () => {
@@ -74,7 +72,6 @@ describe('Photos', () => {
                 });
                 return chakram.wait();
             });
-
         });
 
         it("should not update a not existing photo", () => {
@@ -82,7 +79,6 @@ describe('Photos', () => {
             expect(response).to.have.status(404);
             return chakram.wait();
         });
-
     });
 
     describe('Delete', () => {
@@ -102,7 +98,4 @@ describe('Photos', () => {
             return chakram.wait();
         });
     });
-
-
-
-});
+})

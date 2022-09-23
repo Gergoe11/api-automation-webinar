@@ -1,9 +1,9 @@
+'use strict'
 const chakram = require('chakram');
 const expect = chakram.expect;
 const api = require('./utils/api');
 const data = require('../server/data.json');
 const todosData = require('../database/testdata.json')
-
 
 describe('Todos', () => {
     describe('Create', () => {
@@ -23,7 +23,6 @@ describe('Todos', () => {
                     expect(checkTodo).to.have.json('data.id', 'number');
                     expect(checkTodo).to.have.json('data.title', 'title');
                     return chakram.wait();
-
                 });
         });
 
@@ -32,8 +31,6 @@ describe('Todos', () => {
             expect(response).to.have.status(500);
             return chakram.wait();
         });
-
-
     });
 
     describe('Read', () => {
@@ -52,7 +49,6 @@ describe('Todos', () => {
             const response = chakram.get(api.url('todos/211'));
             return expect(response).to.have.status(404);
         });
-
     });
 
     describe("Updated", () => {
@@ -69,7 +65,6 @@ describe('Todos', () => {
                 });
                 return chakram.wait();
             });
-
         });
 
         it("should not update not existing todo data", () => {
@@ -77,7 +72,6 @@ describe('Todos', () => {
             expect(response).to.have.status(404);
             return chakram.wait();
         });
-
     });
 
     describe("Delete", () => {
@@ -96,10 +90,5 @@ describe('Todos', () => {
             expect(response).to.have.status(404);
             return chakram.wait()
         });
-
-
-
     });
-
-
 });

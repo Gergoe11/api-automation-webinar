@@ -1,11 +1,9 @@
 'use strict';
-
 const chakram = require('chakram');
 const expect = chakram.expect;
 const api = require('./utils/api');
 const data = require('../server/data.json');
 const albumsData = require('../database/testdata.json');
-
 
 describe('Albums', () => {
     describe('Create', () => {
@@ -34,8 +32,6 @@ describe('Albums', () => {
             expect(response).to.have.status(500);
             return chakram.wait();
         });
-
-
     });
 
     describe('Read', () => {
@@ -53,7 +49,6 @@ describe('Albums', () => {
             const response = chakram.get(api.url('albums/123'));
             return expect(response).to.have.status(404);
         });
-
     });
 
     describe("Updated", () => {
@@ -70,7 +65,6 @@ describe('Albums', () => {
                 });
                 return chakram.wait();
             });
-
         });
 
         it("should not update a not existing album", () => {
@@ -80,7 +74,6 @@ describe('Albums', () => {
             console.log
             return chakram.wait();
         });
-
     });
 
     describe("Delete", () => {
@@ -99,7 +92,5 @@ describe('Albums', () => {
             expect(response).to.have.status(404);
             return chakram.wait()
         });
-
-
     });
 })
